@@ -32,10 +32,10 @@ export default defineNuxtConfig({
         enabled: true,
       },
       imports: [
-          'vue',
-          'vue-router',
-          'vue-i18n',
-          'vue/macros',
+          // 'vue',
+          // 'vue-router',
+          // 'vue-i18n',
+          // 'vue/macros',
           // {
           //   '~/store/acl': ['useAclStore', 'UserSession'],
           //   '~/store/alert': ['useAlertStore'],
