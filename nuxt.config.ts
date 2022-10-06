@@ -28,27 +28,27 @@ export default defineNuxtConfig({
       }),
 
       AutoImport({
-      eslintrc: {
-        enabled: true,
-      },
-      imports: [
-          // 'vue',
-          // 'vue-router',
-          // 'vue-i18n',
-          // 'vue/macros',
-          // {
-          //   '~/store/acl': ['useAclStore', 'UserSession'],
-          //   '~/store/alert': ['useAlertStore'],
-          //   '~/store/nav': ['useNavStore'],
-          // },
-        ],
-        dirs: [
-          'shared',
-          'models',
-          'node_modules/@ant-design/icons'
-        ],
-        dts: 'auto-imports.d.ts',
-        vueTemplate: true,
+        eslintrc: {
+          enabled: true,
+        },
+        imports: [
+            // 'vue',
+            // 'vue-router',
+            // 'vue-i18n',
+            // 'vue/macros',
+            // {
+            //   '~/store/acl': ['useAclStore', 'UserSession'],
+            //   '~/store/alert': ['useAlertStore'],
+            //   '~/store/nav': ['useNavStore'],
+            // },
+          ],
+          dirs: [
+            'shared',
+            'models',
+            'node_modules/@ant-design/icons'
+          ],
+          dts: 'auto-imports.d.ts',
+          vueTemplate: true,
       }),
     ],
   },
