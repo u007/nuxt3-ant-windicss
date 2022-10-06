@@ -1,5 +1,5 @@
 <template>
-  <a-card class="mb-2" >
+  <a-card class="mb-2 w-full" >
     <!-- priority -->
     <div class="absolute right-1 top-0">
       <span :class="`text-xs${priority === TaskPriorityEnum.HIGH ? ' text-red-500': ''}
@@ -18,8 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-
-import { UpOutlined, DashOutlined, MinusOutlined } from '@ant-design/icons-vue'
+// import { UpOutlined, DashOutlined, MinusOutlined } from '@ant-design/icons-vue'
 import { PropType } from 'vue';
 
 const props = defineProps({
