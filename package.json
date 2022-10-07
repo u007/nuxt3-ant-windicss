@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
+    "@prisma/client": "^4.4.0",
     "ant-design-vue": "^3.2.12"
   }
 }
