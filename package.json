@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev -p 3800",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
+    "@pinia/nuxt": "^0.4.2",
     "@prisma/client": "^4.4.0",
-    "ant-design-vue": "^3.2.12"
+    "ant-design-vue": "^3.2.12",
+    "pnpm": "^7.13.2"
   }
 }

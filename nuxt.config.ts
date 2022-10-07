@@ -9,14 +9,27 @@ export default defineNuxtConfig({
   //   port: 3800,
   // },
   build: {
-    transpile: ['lodash-es'],
+    transpile: [
+      // 'lodash-es'
+    ],
   },
-  modules: ['nuxt-windicss'],
+  modules: [
+    'nuxt-windicss',
+    [
+      '@pinia/nuxt',
+      {
+        autoImports: [
+          'defineStore', // import { defineStore } from 'pinia'
+          // ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
+        ],
+      },
+    ],
+  ],
   css: [
     // windi preflight
     'virtual:windi-base.css',
     // your stylesheets which overrides the preflight
-    '@/css/main.css',
+    '@/assets/main.css',
     // windi extras
     'virtual:windi-components.css',
     'virtual:windi-utilities.css',
@@ -24,7 +37,7 @@ export default defineNuxtConfig({
   vite: {
     ssr: {
       noExternal: [
-        'ant-design-vue', 'moment', 'compute-scroll-into-view'],
+        'ant-design-vue', 'moment', /vue-i18n/],
     },
     plugins: [
       Components({

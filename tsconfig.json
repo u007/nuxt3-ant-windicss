@@ -3,7 +3,8 @@
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "types": [
-      "nuxt-windicss"
+      "nuxt-windicss",
+      "@pinia/nuxt",
     ]
   }
 }
