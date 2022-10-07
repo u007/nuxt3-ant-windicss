@@ -4,10 +4,10 @@ import AutoImport from 'unplugin-auto-import/vite'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  server: {
-    host: '0.0.0.0',
-    port: 3800,
-  },
+  // server: {
+  //   host: '0.0.0.0',
+  //   port: 3800,
+  // },
   build: {
     transpile: ['lodash-es'],
   },
