@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+// generator dbml {
+//   provider = "prisma-dbml-generator"
+// }
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+type PhotoURL {
+  original String
+  t128     String
+  t256     String
+  t512     String
+  t1024    String
+  t2048    String
+}
+
+model Role {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  isPublic  Boolean  @default(true)
+
+  ownerId   String    @map("_ownerId") @db.ObjectId
+  owner     User      @relation(name: "OwnedRoles", fields: [ownerId], references: [id])
+  deletedAt DateTime?
+
+  @@unique([ownerId, name])
+}
+
+model User {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  loginId     String    @unique
+  email       String?
+  password    String
+  firstname   String?
+  lastname    String?
+  name        String?
+  identityNo  String?
+  phoneNo     String?   @unique
+  staffId     String?   @unique
+  country     String?
+  position    String?
+  department  String?
+  manager     String?
+  category    String?
+  photo       String?
+  photoURL    PhotoURL?
+  status      Int?      @default(1)
+
+  roles        String[]
+
+  ownedRoles Role[] @relation("OwnedRoles")
+
+  deletedAt DateTime?
+}
