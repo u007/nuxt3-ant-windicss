@@ -1,9 +1,9 @@
 <template>
   <h1 class="font-medium text-lg">Hi!</h1>
-  <a-button >
+  <AButton >
     <apple-outlined />
     click me
-  </a-button>
+  </AButton>
 
   <div class="flex flex-wrap">
     <kanban-list v-for="col in columns" v-bind="col">
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { AppleOutlined } from '@ant-design/icons-vue'
+//import { AppleOutlined } from '@ant-design/icons-vue'
 
 const tasks = [
   { title: "test", status: "TODO", summary: "abc 123", priority: TaskPriorityEnum.HIGH },
