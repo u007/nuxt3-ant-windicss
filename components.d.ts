@@ -8,7 +8,6 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AButton: typeof import('ant-design-vue/es')['Button']
-    ACard: typeof import('ant-design-vue/es')['Card']
     AccountBookFilled: typeof import('./node_modules/@ant-design/icons-vue/es/icons/AccountBookFilled.js')['default']
     AccountBookOutlined: typeof import('./node_modules/@ant-design/icons-vue/es/icons/AccountBookOutlined.js')['default']
     AccountBookTwoTone: typeof import('./node_modules/@ant-design/icons-vue/es/icons/AccountBookTwoTone.js')['default']

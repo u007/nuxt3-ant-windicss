@@ -9,7 +9,6 @@ export default defineNuxtConfig({
   buildModules: [],
   build: {
     transpile: [
-      // 'lodash-es'
     ],
   },
   css: [
@@ -26,7 +25,6 @@ export default defineNuxtConfig({
       noExternal: [
         'ant-design-vue/es',
         /vue-i18n/,
-        'lodash-es',
       ],
     },
     plugins: [

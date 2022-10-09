@@ -1,5 +1,5 @@
 <template>
-  <a-card class="mb-2 w-full" >
+  <ACard class="mb-2 w-full" :key="id">
     <!-- priority -->
     <div class="absolute right-1 top-0">
       <span :class="`text-xs${priority === TaskPriorityEnum.HIGH ? ' text-red-500': ''}
@@ -14,14 +14,19 @@
     status: {{status}}
 
     
-  </a-card>
+  </ACard>
 </template>
 
 <script lang="ts" setup>
-// import { UpOutlined, DashOutlined, MinusOutlined } from '@ant-design/icons-vue'
+import { Card as ACard } from 'ant-design-vue';
 import { PropType } from 'vue';
+import { TaskStatusEnum, TaskPriorityEnum } from '@/models/Task'
 
 const props = defineProps({
+  id: {
+    type: Number,
+    required: true,
+  },
   title: {
     type: String,
     required: true,

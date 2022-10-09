@@ -19,9 +19,9 @@
 //import { AppleOutlined } from '@ant-design/icons-vue'
 
 const tasks = [
-  { title: "test", status: "TODO", summary: "abc 123", priority: TaskPriorityEnum.HIGH },
-  { title: "test 2", status: "TODO", summary: "abc 123", priority: TaskPriorityEnum.MEDIUM },
-  { title: "test 3", status: "TODO", summary: "abc 123", priority: TaskPriorityEnum.LOW }
+  { id: 1, title: "test", status: "TODO", summary: "abc 123", priority: TaskPriorityEnum.HIGH },
+  { id: 2, title: "test 2", status: "TODO", summary: "abc 123", priority: TaskPriorityEnum.MEDIUM },
+  { id: 3, title: "test 3", status: "TODO", summary: "abc 123", priority: TaskPriorityEnum.LOW }
 ]
 
 const columns = [
