@@ -1,16 +1,30 @@
-import Components from 'unplugin-vue-components/vite';
-import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
-import AutoImport from 'unplugin-auto-import/vite';
+// import Components from 'unplugin-vue-components/vite';
+// import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+// import AutoImport from 'unplugin-auto-import/vite';
 // import { createStyleImportPlugin, AntdResolve } from 'vite-plugin-style-import'
+// const isDev = process.env.NODE_ENV === 'development';
+
+import fs from 'fs'
+import path from 'path'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  modules: ['nuxt-windicss'],
   buildModules: [],
   build: {
-    transpile: [
-    ],
+    transpile: ['@babel/runtime', 'lodash-es']
   },
+  modules: [
+    'nuxt-windicss',
+    [
+      '@pinia/nuxt',
+      {
+        autoImports: [
+          'defineStore'// import { defineStore } from 'pinia'
+          // ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
+        ]
+      }
+    ]
+  ],
   css: [
     // windi preflight
     'virtual:windi-base.css',
@@ -18,27 +32,81 @@ export default defineNuxtConfig({
     '@/assets/main.css',
     // windi extras
     'virtual:windi-components.css',
-    'virtual:windi-utilities.css',
+    'virtual:windi-utilities.css'
   ],
+
+  components: {
+    dirs: [
+      '~/components',
+      { prefix: 'a', extensions: ['vue', 'ts', 'js'], path: '~/node_modules/ant-design-vue/es' },
+      // icons is now prefixed with Icons / icons-
+      'node_modules/@ant-design/icons-vue/es'
+    ]
+  },
+  plugins: [
+    // not needed anymore - temp work around since all attempt to make auto import failed
+    // '@/plugins/antd',
+  ],
+  imports: {
+    dirs: [
+      // Scan composables from nested directories
+      'composables/**',
+      'models/**'
+    ]
+  },
+  hooks: {
+    'imports:extend': (imports) => {
+      console.log('imports', imports)
+      const eslintConfig: { globals: { [key: string]: string } } = {
+        globals: {}
+      }
+      imports.forEach((preset) => {
+        // console.log('preset', preset)
+        eslintConfig.globals[preset.name] = 'readonly'
+      })
+
+      fs.writeFileSync(
+        path.join(__dirname, '.nuxt', 'eslint-extend-globals.json'),
+        JSON.stringify(eslintConfig, null, 2)
+      )
+    },
+    // Output all auto-imports to a json file. Extend in eslint config with .nuxt/eslint-globals.json
+    'autoImports:sources': (presets) => {
+      const eslintConfig: { globals: { [key: string]: string } } = {
+        globals: {}
+      }
+
+      presets.forEach((preset) => {
+        // console.log('preset', preset)
+        preset.imports.forEach((presetImport) => {
+          eslintConfig.globals[presetImport.toString()] = 'readonly'
+        })
+      })
+
+      fs.writeFileSync(
+        path.join(__dirname, '.nuxt', 'eslint-globals.json'),
+        JSON.stringify(eslintConfig, null, 2)
+      )
+    }
+  },
   vite: {
     ssr: {
-      noExternal: [
-        'ant-design-vue/es',
-        /vue-i18n/,
-      ],
+      noExternal: ['ant-design-vue/es', 'lodash-es', /vue-i18n/]
     },
     plugins: [
-      Components({
-        resolvers: [
-          AntDesignVueResolver({ cjs: false, importStyle: false }),
-        ],
-        dirs: [
-          "node_modules/@ant-design/icons-vue/es",
-        ],
-        extensions: ['vue', 'js'],
-        dts: 'components.d.ts',
-      }),
-
+      // no longer need this as components.d.ts is generated in .nuxt/
+      // Components({
+      //   resolvers: [
+      //     // has issue where AButton works, but some component like ACard does not on pnpm run build
+      //     //  so falling back to nuxt plugins
+      //     // AntDesignVueResolver({ cjs: false, importStyle: false }),
+      //   ],
+      //   dirs: [
+      //     "node_modules/@ant-design/icons-vue/es",
+      //   ],
+      //   extensions: ['vue', 'js'],
+      //   dts: 'components.d.ts',
+      // }),
       // createStyleImportPlugin({
       //   resolves: [AntdResolve()],
       //   libs: [
@@ -74,28 +142,9 @@ export default defineNuxtConfig({
       //     },
       //   ],
       // }),
-
-      AutoImport({
-        eslintrc: {
-          enabled: true,
-        },
-        imports: [
-          'vue',
-          'vue-router',
-          'vue-i18n',
-          'vue/macros',
-          // {
-          //   '~/store/acl': ['useAclStore', 'UserSession'],
-          //   '~/store/alert': ['useAlertStore'],
-          //   '~/store/nav': ['useNavStore'],
-          // },
-        ],
-        dirs: [
-          "models",
-        ],
-        dts: 'auto-imports.d.ts',
-        vueTemplate: true,
-      }),
-    ],
+    ]
   },
-});
+  typescript: {
+    strict: true // required to make input/output types work
+  }
+})
