@@ -18,9 +18,8 @@
 </template>
 
 <script lang="ts" setup>
-import { Card as ACard } from 'ant-design-vue';
-import { PropType } from 'vue';
-import { TaskStatusEnum, TaskPriorityEnum } from '@/models/Task'
+import { PropType } from 'vue'
+import { TaskStatusEnum, TaskPriorityEnum } from '@/models/task'
 
 const props = defineProps({
   id: {

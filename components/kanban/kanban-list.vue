@@ -8,7 +8,8 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import { PropType } from 'vue'
+import { Task } from '@/models/task'
 
 const props = defineProps({
   title: {
