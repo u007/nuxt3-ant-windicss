@@ -11,12 +11,12 @@ export enum TaskPriorityEnum {
   HIGH = 'HIGH',
 }
 
-export class Task {
-  id: number;
-  name: string;
-  description: string;
-  status: TaskStatusEnum;
-  priority: TaskPriorityEnum;
-  createdAt: Date;
-  updatedAt: Date;
+export type Task = {
+  id: number
+  title: string
+  description: string
+  status: TaskStatusEnum
+  priority: TaskPriorityEnum
+  createdAt: Date
+  updatedAt: DateConstructor
 }
