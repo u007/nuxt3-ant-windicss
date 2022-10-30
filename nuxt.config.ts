@@ -56,7 +56,7 @@ export default defineNuxtConfig({
   },
   hooks: {
     'imports:extend': (imports) => {
-      console.log('imports', imports)
+      // console.log('imports', imports)
       const eslintConfig: { globals: { [key: string]: string } } = {
         globals: {}
       }
@@ -70,24 +70,6 @@ export default defineNuxtConfig({
         JSON.stringify(eslintConfig, null, 2)
       )
     },
-    // Output all auto-imports to a json file. Extend in eslint config with .nuxt/eslint-globals.json
-    'autoImports:sources': (presets) => {
-      const eslintConfig: { globals: { [key: string]: string } } = {
-        globals: {}
-      }
-
-      presets.forEach((preset) => {
-        // console.log('preset', preset)
-        preset.imports.forEach((presetImport) => {
-          eslintConfig.globals[presetImport.toString()] = 'readonly'
-        })
-      })
-
-      fs.writeFileSync(
-        path.join(__dirname, '.nuxt', 'eslint-globals.json'),
-        JSON.stringify(eslintConfig, null, 2)
-      )
-    }
   },
   vite: {
     ssr: {
